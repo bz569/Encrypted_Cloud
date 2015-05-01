@@ -13,7 +13,7 @@ DropboxConnection::~DropboxConnection()
 {
 }
 
-void DropboxConnection::uploadFile(char* path){
+void DropboxConnection::uploadFile(const char* path){
 	Py_Initialize();
 
 	PyObject *pModule = NULL;
@@ -31,7 +31,7 @@ void DropboxConnection::uploadFile(char* path){
 	Py_Finalize();
 }
 
-void DropboxConnection::downloadFile(char* path, char* saveTo){
+void DropboxConnection::downloadFile(const char* path, char* saveTo){
 	Py_Initialize();
 
 	PyObject *pModule = NULL;

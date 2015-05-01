@@ -13,12 +13,12 @@ public:
 
 	// upload file to Dropbox
 	// path: the path of file to upload
-	static void uploadFile(char* path);
+	static void uploadFile(const char* path);
 
 	// download file from Dropbox
 	// path: the Dropbox path of file to download
 	// saveTo: the folder to save the downloaded file
-	static void downloadFile(char* path, char* saveTo);
+	static void downloadFile(const char* path, char* saveTo);
 
 	// list all files in Dropbox
 	static void listFiles();
