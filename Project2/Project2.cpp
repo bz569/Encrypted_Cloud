@@ -230,6 +230,13 @@ void downloadFile(string originalFileName, string saveTo) {
 	DropboxConnection::downloadFile(dropboxPath.c_str(), "");
 	decryptFile("Password", originalFileName, saveTo);
 
+	string encrypteFileBuff = readFile(encryptedName);
+	string fileHash = MD5(encrypteFileBuff).toStr();
+	string localHash = fileInfoDict[originalFileName];
+	if (fileHash != localHash) {
+		cout << "!!!: File has been modified" << endl;
+	}
+
 	// delete local encrypted file
 	remove(encryptedName.c_str());
 }
@@ -255,7 +262,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			<< "***********************************************************" << endl
 			<< "***         Boxuan Zhang (N18295695)                    ***" << endl
 			<< "***         Yao Jin                                     ***" << endl
-			<< "***         Yuanduo Chen                                ***" << endl
+			<< "***         Yuanduo Chen (N10542550)                    ***" << endl
 			<< "***********************************************************" << endl
 			<< "*** List files in cloud: list                           ***" << endl
 			<< "*** Upload file: upload FILE_PATH                       ***" << endl
