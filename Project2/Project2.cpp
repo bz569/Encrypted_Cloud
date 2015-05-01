@@ -204,7 +204,7 @@ void writeFileInfoDict() {
 
 // priginalFilePath: the path of file to upload
 void uploadFile(string originalFilePath) {
-	vector<string> splitedString = split(originalFilePath, "/");
+	vector<string> splitedString = split(originalFilePath, "\\");
 	string originalName = splitedString[splitedString.size() - 1];
 	string encryptedName = getFileName("Password", originalName);
 	encryptFile("Password", originalName, originalFilePath);
@@ -212,7 +212,7 @@ void uploadFile(string originalFilePath) {
 	string encrypteFileBuff = readFile(encryptedName);
 	string fileHash = MD5(encrypteFileBuff).toStr();
 
-	//DropboxConnection::uploadFile(encryptedName.c_str());
+	DropboxConnection::uploadFile(encryptedName.c_str());
 
 	// save original file name and md5hash
 	fileInfoDict[originalName] = fileHash;
@@ -247,7 +247,38 @@ int _tmain(int argc, _TCHAR* argv[])
 	loadFileInfoDict();
 	// uploadFile("C:/Users/ZhangBoxuan/Desktop/test.txt");
 	// downloadFile("test.txt", "C:/Users/ZhangBoxuan/Desktop");
-	listDropboxFiles();
+	//listDropboxFiles();
+
+	while (true) {
+		cout << "***********************************************************" << endl
+			<< "***         Applied Cryptography -- Project 2           ***" << endl
+			<< "***********************************************************" << endl
+			<< "***         Boxuan Zhang (N18295695)                    ***" << endl
+			<< "***         Yao Jin                                     ***" << endl
+			<< "***         Yuanduo Chen                                ***" << endl
+			<< "***********************************************************" << endl
+			<< "*** List files in cloud: list                           ***" << endl
+			<< "*** Upload file: upload FILE_PATH                       ***" << endl
+			<< "*** Download file: download FILE_NAME PATH_TO_SAVE_FILE ***" << endl
+			<< "***********************************************************" << endl
+			<< "Please enter: ";
+
+		string inputString;
+		getline(cin, inputString);
+
+		vector<string> args = split(inputString, " ");
+		if (args[0] == "list") {
+			listDropboxFiles();
+		}
+		else if (args[0] == "upload") {
+			uploadFile(args[1]);
+		}
+		else if (args[0] == "download") {
+			downloadFile(args[1], args[2]);
+		}
+	}
+
+
 
 	system("pause");
 
